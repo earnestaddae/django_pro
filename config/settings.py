@@ -41,6 +41,9 @@ INSTALLED_APPS = [
     # Local
     'accounts',
     'pages',
+
+    # 3rd Party
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -140,3 +143,6 @@ LOGIN_REDIRECT_URL = 'home'
 
 # Tells Django to redirect when logout
 LOGOUT_REDIRECT_URL = 'home'
+
+# Django-crispy-froms
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
