@@ -1,0 +1,10 @@
+{% extends '_base.jinja' %}
+
+{% block content %}
+    {% for book in book_list %}
+        <div class="book-list">
+            <h2><a href="{{ book.get_absolute_url }}">{{book.title}}</a></h2>
+
+        </div>
+    {% endfor %}
+{% endblock content %}
