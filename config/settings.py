@@ -167,3 +167,6 @@ ACCOUNT_UNIQUE_EMAIL = True
 # Handles emails in console
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
+# Default email
+DEFAULT_FROM_EMAIL = 'admin@earnestpro.com'
+
