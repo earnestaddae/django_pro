@@ -2,6 +2,7 @@ import pytest
 from django.urls import reverse, resolve
 from pytest_django.asserts import assertTemplateUsed
 from django.contrib.auth import get_user_model
+from django.contrib.auth.models import Permission
 from ..models import Book, Review
 
 pytestmark = pytest.mark.django_db
@@ -23,6 +24,9 @@ def create_review(create_book):
         email='reviewer@email.com',
         password='passme123',
     )
+
+    special_permission = Permission.objects.get(codename='special_status')
+
     review = Review.objects.create(
         book = create_book,
         author = user,
@@ -36,7 +40,8 @@ class TestBook:
         assert create_book.author == 'Ernest Becker'
         assert create_book.price == '98'
 
-    def test_book_list_view(self, client):
+    def test_book_list_view_for_logged_in_user(self, client, create_review):
+        client.login(email=create_review.author.email, password=create_review.author.password)
         response = client.get(reverse('book_list'))
         assert response.status_code == 200
         assertTemplateUsed(response, 'books/book_list.jinja')
