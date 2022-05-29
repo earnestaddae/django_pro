@@ -47,10 +47,12 @@ INSTALLED_APPS = [
     # 3rd Party
     'crispy_forms',
     'allauth',
-    'allauth.account'
+    'allauth.account',
+    'debug_toolbar',
 ]
 
 MIDDLEWARE = [
+    'django.middleware.cache.UpdateCacheMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -58,7 +60,13 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
+    'django.middleware.cache.FetchFromCacheMiddleware',
 ]
+
+CACHE_MIDDLEWARE_ALIAS = 'default'
+CACHE_MIDDLEWARE_SECONDS = 604800
+CACHE_MIDDLEWARE_KEY_PREFIX = ''
 
 ROOT_URLCONF = 'config.urls'
 
@@ -171,6 +179,11 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 # Default email
 DEFAULT_FROM_EMAIL = 'admin@earnestpro.com'
 
+# For image upload requires Pillow
 MEDIA_URL = '/media/'
 MEDIA_ROOT = str(BASE_DIR.joinpath('media'))
+
+# For debug_toobar
+INTERNAL_IPS = ("127.0.0.1")
+
 
