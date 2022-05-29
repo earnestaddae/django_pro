@@ -171,3 +171,6 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 # Default email
 DEFAULT_FROM_EMAIL = 'admin@earnestpro.com'
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = str(BASE_DIR.joinpath('media'))
+
